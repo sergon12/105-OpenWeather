@@ -99,7 +99,7 @@ public class GetWeather {
             if (!manual) {
                 obj = fetch(location);
             } else {
-                obj = fetch_(location);
+                obj = fetch();
             }
 
             result[0]  = obj.getJSONArray("weather").getJSONObject(0).get("description").toString();
@@ -258,13 +258,14 @@ public class GetWeather {
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
             preparedStatement.executeUpdate();
+
         } catch (SQLException sqle) {
             System.out.println("logWeatherToDB SQL exception: " + sqle);
         }
     }
 
 
-    private JSONObject fetch_(String location) throws IOException, JSONException {
+    private JSONObject fetch() throws IOException, JSONException {
         JSONObject response = new JSONObject(manualResp);
         return response;
     }
