@@ -25,8 +25,8 @@ public class GetWeather {
 
 
 
-    private boolean manual = false;
-//    private boolean manual = true;
+    private boolean manual = false;  //
+//    private boolean manual = true;  //
 
     private String manualResp = "";
 
