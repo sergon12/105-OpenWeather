@@ -82,10 +82,7 @@ public class Converter {
                 1587863722,	1587916719,
                 1587518634,	1587570687,
                 1588208829,	1588262749,
-                1588208829,	1588262749
-        };
-
-
+                1588208829,	1588262749  };
 
         for (int i =0; i < list.length; i=i+2) {
             long rise = list[i];
@@ -103,15 +100,16 @@ public class Converter {
         }
 
 
-
         System.out.println("-------------------------");
 
 
+        LocalDateTime sunriseTime;
+        String sunriseTimeString;
 
         moment = "1583119455";
 
-        LocalDateTime sunriseTime = new LocalDateTime(1000 * Long.parseLong(moment));
-        String sunriseTimeString = sunriseTime.toLocalTime().toString();
+        sunriseTime = new LocalDateTime(1000 * Long.parseLong(moment));
+        sunriseTimeString = sunriseTime.toLocalTime().toString();
         sunriseTimeString = sunriseTimeString.split("\\.")[0];
         System.out.println("sunriseTimeString = " + sunriseTimeString + " at moment " + moment);
 
@@ -121,7 +119,6 @@ public class Converter {
         sunriseTimeString = sunriseTime.toLocalTime().toString();
         sunriseTimeString = sunriseTimeString.split("\\.")[0];
         System.out.println("sunsetTimeString  = " + sunriseTimeString + " at moment " + moment);
-
 
         long end = System.currentTimeMillis();
         long time = end - current;

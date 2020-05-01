@@ -95,7 +95,7 @@ public class GetWeather {
         result[0] = "error";
         try {
 
-            JSONObject obj = null;
+            JSONObject obj;
             if (!manual) {
                 obj = fetch(location);
             } else {
