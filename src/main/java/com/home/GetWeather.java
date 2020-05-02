@@ -174,7 +174,7 @@ public class GetWeather {
     private String getWindDirection(String windDegree) {
         String direction = "";
         double angle = Double.parseDouble(windDegree);
-        if (angle > 348.75 && angle < 11.25) {         direction = "N";
+        if (angle > 348.75 || angle < 11.25) {         direction = "N";
         } else if (angle > 11.25 && angle < 33.75)   { direction = "N,NE";
         } else if (angle > 33.75 && angle < 56.25)   { direction = "NE";
         } else if (angle > 56.25 && angle < 78.15)   { direction = "E,NE";
