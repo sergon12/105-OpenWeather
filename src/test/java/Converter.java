@@ -1,3 +1,4 @@
+import com.home.GetWeather;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
@@ -124,5 +125,13 @@ public class Converter {
         long time = end - current;
         System.out.println("time  = " + time + " ms");
     }
+
+
+    @Test
+    public void test() {
+        GetWeather getWeather = new GetWeather();
+        System.out.println("wind: " + getWeather.getWindDirection("360"));
+    }
+
 
 }
