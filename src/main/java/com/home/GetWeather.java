@@ -24,10 +24,7 @@ import java.text.DecimalFormat;
 public class GetWeather {
 
 
-
-    private boolean manual = false;  //
-//    private boolean manual = true;  //
-
+    //please enter responce from OpenWeather here:
     private String manualResp = "";
 
 
@@ -96,9 +93,11 @@ public class GetWeather {
         try {
 
             JSONObject obj;
-            if (!manual) {
+            if (manualResp.length() == 0) {
+                System.out.println("auto");
                 obj = fetch(location);
             } else {
+                System.out.println("manual");
                 obj = fetch();
             }
 
