@@ -94,10 +94,10 @@ public class GetWeather {
 
             JSONObject obj;
             if (manualResp.length() == 0) {
-                System.out.println("auto");
+                //System.out.println("auto");
                 obj = fetch(location);
             } else {
-                System.out.println("manual");
+                //System.out.println("manual");
                 obj = fetch();
             }
 
@@ -225,10 +225,10 @@ public class GetWeather {
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/db1?currentSchema=schema1", "postgres", "pass4p");
+
             DateTime current = new DateTime();
             DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
             String currentDate = fmt.print(current);
-
             System.out.println("currentDate = " + currentDate);                             //            LocalDate dateFormat = new LocalDate();   //            System.out.println("dateFormat = " + dateFormat.toString());
 
 
