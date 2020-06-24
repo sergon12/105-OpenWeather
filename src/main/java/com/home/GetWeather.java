@@ -78,6 +78,8 @@ public class GetWeather {
         System.out.println("Clouds      :  " + arrayStr[11] + " %");
         System.out.println("Sunrise     :  " + convertLongToTime(arrayStr[14]));
         System.out.println("Sunset      :  " + convertLongToTime(arrayStr[15]));
+        long length = (Long.parseLong(arrayStr[15]) - Long.parseLong(arrayStr[14]));
+        getDayLength(length);
         //System.out.println("id            " + arrayStr[3]);
 
         if (logToDB) {
@@ -267,6 +269,13 @@ public class GetWeather {
     private JSONObject fetch() throws IOException, JSONException {
         JSONObject response = new JSONObject(manualResp);
         return response;
+    }
+
+    private void getDayLength(Long s){
+        Long hours = s / 3600;
+        Long minutes = (s % 3600) / 60;
+        Long seconds = s % 60;
+        System.out.println("Day length: :  " + hours + "h " + minutes + "m " + seconds+ "s");
     }
 
 
