@@ -78,8 +78,8 @@ public class GetWeather {
         System.out.println("Clouds      :  " + arrayStr[11] + " %");
         System.out.println("Sunrise     :  " + convertLongToTime(arrayStr[14]));
         System.out.println("Sunset      :  " + convertLongToTime(arrayStr[15]));
-        long length = (Long.parseLong(arrayStr[15]) - Long.parseLong(arrayStr[14]));
-        getDayLength(length);
+        long length = dayLengthMilliseconds(arrayStr[14], arrayStr[15]);
+        System.out.println("Day length: :  " + getDayLength(length));
         //System.out.println("id            " + arrayStr[3]);
 
         if (logToDB) {
@@ -225,6 +225,9 @@ public class GetWeather {
         long sunrise = Long.parseLong(arrayStr[14]);
         long sunset  = Long.parseLong(arrayStr[15]);
 
+        long length = dayLengthMilliseconds(arrayStr[14], arrayStr[15]);
+        String dayLength = getDayLength(length);
+
         try {
             Connection connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/db1?currentSchema=schema1", "postgres", "pass4p");
 
@@ -236,25 +239,26 @@ public class GetWeather {
 
             String insertQuery = "insert into weather" +
                     "(time, city, city_id, weather, temperature, feels_like, pressure, humidity, visibility," +
-                    " wind_speed, wind_degree, wind, clouds, sunrise, sunset, sunrise_time, sunset_time)" +
+                    " wind_speed, wind_degree, wind, clouds, sunrise, sunset, sunrise_time, sunset_time, day_length)" +
                     " values ('" +
-                    currentDate + "', '" +
-                    city + "', '" +
-                    city_id + "', '" +
-                    weather + "', '" +
-                    temperature + "', '" +
-                    feels_like + "', '" +
-                    pressure + "', '" +
-                    humidity + "', '" +
-                    visibility + "', '" +
-                    wind_speed + "', '" +
-                    wind_degree + "', '" +
-                    wind + "', '" +
-                    clouds + "', '" +
-                    sunrise + "', '" +
-                    sunset + "', '" +
-                    convertLongToTime(arrayStr[14]) + "', '" +
-                    convertLongToTime(arrayStr[15]) +
+                    currentDate + "','" +
+                    city + "','" +
+                    city_id + "','" +
+                    weather + "','" +
+                    temperature + "','" +
+                    feels_like + "','" +
+                    pressure + "','" +
+                    humidity + "','" +
+                    visibility + "','" +
+                    wind_speed + "','" +
+                    wind_degree + "','" +
+                    wind + "','" +
+                    clouds + "','" +
+                    sunrise + "','" +
+                    sunset + "','" +
+                    convertLongToTime(arrayStr[14]) + "','" +
+                    convertLongToTime(arrayStr[15]) + "','" +
+                    dayLength +
                     "')";
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
@@ -271,11 +275,12 @@ public class GetWeather {
         return response;
     }
 
-    private void getDayLength(Long s){
-        Long hours = s / 3600;
-        Long minutes = (s % 3600) / 60;
-        Long seconds = s % 60;
-        System.out.println("Day length: :  " + hours + "h " + minutes + "m " + seconds+ "s");
+    private String getDayLength(Long seconds){
+        return (seconds / 3600) + "h " + ((seconds % 3600) / 60) + "m " + (seconds % 60) + "s";
+    }
+
+    private long dayLengthMilliseconds(String sunrise, String sunset) {
+        return Long.parseLong(sunset) - Long.parseLong(sunrise);
     }
 
 
